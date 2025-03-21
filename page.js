@@ -20,16 +20,6 @@ export default function HomePage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Sample travel destinations for floating pictures
-  const destinations = [
-    { name: 'Paris', color: 'bg-amber-200',image : '/paris.jpg' },
-    { name: 'Tokyo', color: 'bg-red-200', image: 'tokyo.jpg' },
-    { name: 'Bali', color: 'bg-emerald-200', image: 'bali.jpg' },
-    { name: 'New York', color: 'bg-blue-200', image: 'newyork.jpg' },
-    { name: 'Rome', color: 'bg-orange-200', image: 'rome.jpg' }
-  ];
-  
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-200 via-sky-100 to-white text-gray-800 overflow-hidden">
       {/* Cloud Animations */}
@@ -114,51 +104,6 @@ export default function HomePage() {
           />
         </div>
       </motion.div>
-
-      {/* Floating Pictures */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-      {destinations.map((dest, index) => (
-  <motion.div
-    key={index}
-    initial={{ 
-      x: `${Math.random() * 100}%`, 
-      y: `${Math.random() * 100}%`,
-      opacity: 0,
-      rotate: Math.random() * 20 - 10
-    }}
-    animate={{ 
-      x: `${Math.random() * 100}%`,
-      y: `${Math.random() * 100}%`,
-      opacity: [0, 0.8, 0.8, 0],
-      rotate: Math.random() * 20 - 10
-    }}
-    transition={{
-      duration: 30 + Math.random() * 15,
-      repeat: Infinity,
-      repeatType: 'reverse',
-      delay: index * 5
-    }}
-    className={`absolute ${index % 2 === 0 ? 'w-32 h-24' : 'w-24 h-32'} rounded-lg shadow-lg flex items-center justify-center overflow-hidden`}
-  >
-    {/* Destination Image */}
-    <img
-      src={dest.image} 
-      alt={dest.name} 
-      className="absolute inset-0 w-full h-full object-cover"
-    />
-
-    {/* Destination Name Overlay */}
-    <div className="absolute inset-0 flex items-end justify-center p-2 bg-gradient-to-t from-black/50 to-transparent">
-      <p className="text-white font-bold text-sm">{dest.name}</p>
-    </div>
-
-    {/* Camera Icon */}
-    <div className="absolute top-2 right-2 bg-white rounded-full p-1">
-      <Camera size={12} className="text-sky-500" />
-    </div>
-  </motion.div>
-))}
-      </div>
 
       {/* Navigation */}
       <nav className="relative z-20 flex justify-between items-center px-8 py-6 md:px-16 lg:px-24 bg-white/80 backdrop-blur-md shadow-md rounded-b-lg">
@@ -368,6 +313,165 @@ export default function HomePage() {
           </motion.div>
           
           {/* Add your features here */}
+        </div>
+      </section>
+
+      {/* Destinations Section - Picture Cards */}
+      <section id="destinations" className="relative z-10 bg-sky-50 py-16 px-6 md:px-16 lg:px-24">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl font-bold text-gray-800">Popular Destinations</h2>
+            <p className="mt-4 text-gray-600 max-w-xl mx-auto">
+              Discover breathtaking locations recommended by AI-Nomad
+            </p>
+          </motion.div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Destination Card 1 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              whileHover={{ 
+                y: -10,
+                boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+              }}
+              className="bg-white rounded-xl overflow-hidden shadow-lg"
+            >
+              <div className="relative h-64 w-full">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                <Image
+                  src="/tokyo.jpg"
+                  alt="Kyoto, Japan"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute bottom-4 left-4 z-20 text-white">
+                  <h3 className="text-xl font-bold">Kyoto, Japan</h3>
+                  <p className="text-sm opacity-90">Traditional temples & gardens</p>
+                </div>
+              </div>
+              <div className="p-6">
+                <p className="text-gray-600 mb-4">Experience the perfect blend of ancient traditions and modern innovations in Japan's cultural capital.</p>
+                <div className="flex justify-between items-center">
+                  <span className="text-sky-600 font-medium">4.9 ★★★★★</span>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-4 py-2 bg-sky-500 text-white rounded-lg text-sm font-medium hover:bg-sky-600 transition-all"
+                  >
+                    Explore
+                  </motion.button>
+                </div>
+              </div>
+            </motion.div>
+            
+            {/* Destination Card 2 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              whileHover={{ 
+                y: -10,
+                boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+              }}
+              className="bg-white rounded-xl overflow-hidden shadow-lg"
+            >
+              <div className="relative h-64 w-full">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                <Image
+                  src="/santironi.jpg"
+                  alt="Santorini, Greece"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute bottom-4 left-4 z-20 text-white">
+                  <h3 className="text-xl font-bold">Santorini, Greece</h3>
+                  <p className="text-sm opacity-90">Iconic white & blue views</p>
+                </div>
+              </div>
+              <div className="p-6">
+                <p className="text-gray-600 mb-4">Breathtaking sunsets, crystal-clear waters, and charming villages await on this magical Greek island.</p>
+                <div className="flex justify-between items-center">
+                  <span className="text-sky-600 font-medium">4.8 ★★★★★</span>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-4 py-2 bg-sky-500 text-white rounded-lg text-sm font-medium hover:bg-sky-600 transition-all"
+                  >
+                    Explore
+                  </motion.button>
+                </div>
+              </div>
+            </motion.div>
+            
+            {/* Destination Card 3 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              whileHover={{ 
+                y: -10,
+                boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+              }}
+              className="bg-white rounded-xl overflow-hidden shadow-lg"
+            >
+              <div className="relative h-64 w-full">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                <Image
+                  src="/bali.jpg"
+                  alt="Bali, Indonesia"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute bottom-4 left-4 z-20 text-white">
+                  <h3 className="text-xl font-bold">Bali, Indonesia</h3>
+                  <p className="text-sm opacity-90">Tropical paradise getaway</p>
+                </div>
+              </div>
+              <div className="p-6">
+                <p className="text-gray-600 mb-4">Discover lush rice terraces, spiritual temples, and pristine beaches on the Island of the Gods.</p>
+                <div className="flex justify-between items-center">
+                  <span className="text-sky-600 font-medium">4.7 ★★★★★</span>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-4 py-2 bg-sky-500 text-white rounded-lg text-sm font-medium hover:bg-sky-600 transition-all"
+                  >
+                    Explore
+                  </motion.button>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+          
+          <div className="text-center mt-12">
+            <motion.button
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: "0 10px 15px -3px rgba(59, 130, 246, 0.3)"
+              }}
+              whileTap={{ scale: 0.95 }}
+              className="px-6 py-3 bg-sky-500 text-white rounded-lg font-bold text-lg flex items-center mx-auto gap-2 shadow-md hover:bg-sky-600 transition-all"
+            >
+              View All Destinations
+              <motion.div
+                animate={{ x: [0, 5, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <ArrowRight size={18} />
+              </motion.div>
+            </motion.button>
+          </div>
         </div>
       </section>
 
